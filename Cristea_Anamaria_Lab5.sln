@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cristea_Anamaria_Lab5", "Cristea_Anamaria_Lab5.csproj", "{FF8B0353-0F9F-47C6-ACD8-3F591727CBE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoLotModel", "AutoLotModel\AutoLotModel.csproj", "{93E50074-4934-43B5-8798-80E4B1B2437C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF8B0353-0F9F-47C6-ACD8-3F591727CBE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF8B0353-0F9F-47C6-ACD8-3F591727CBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF8B0353-0F9F-47C6-ACD8-3F591727CBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF8B0353-0F9F-47C6-ACD8-3F591727CBE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93E50074-4934-43B5-8798-80E4B1B2437C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93E50074-4934-43B5-8798-80E4B1B2437C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93E50074-4934-43B5-8798-80E4B1B2437C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93E50074-4934-43B5-8798-80E4B1B2437C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {11C87F7C-8455-479D-A022-6B164C8E3A87}
+	EndGlobalSection
+EndGlobal
