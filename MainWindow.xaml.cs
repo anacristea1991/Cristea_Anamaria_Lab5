@@ -35,6 +35,8 @@ namespace Cristea_Anamaria_Lab5
         AutoLotEntitiesModel ctx = new AutoLotEntitiesModel();
         CollectionViewSource customerViewSource;
         CollectionViewSource inventoryViewSource;
+        CollectionViewSource customerOrdersViewSource;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,11 +48,25 @@ namespace Cristea_Anamaria_Lab5
             customerViewSource =
                         ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerViewSource")));
             customerViewSource.Source = ctx.Customer.Local;
-            ctx.Customer.Load();
+
+            customerOrdersViewSource =
+                ((System.Windows.Data.CollectionViewSource)(this.FindResource("customerOrderViewSource")));
+            //customerOrdersViewSource.Source = ctx.Order.Local;
+            BindDataGrid();
+
             inventoryViewSource =
                        ((System.Windows.Data.CollectionViewSource)(this.FindResource("inventoryViewSource")));
             inventoryViewSource.Source = ctx.Inventory.Local;
+
+            ctx.Customer.Load();
+            ctx.Order.Load();
             ctx.Inventory.Load();
+            cmbCustomers.ItemsSource = ctx.Customer.Local;
+            // cmbCustomers.DisplayMemberPath = "FirstName";
+            cmbCustomers.SelectedValuePath = "CustId";
+            cmbInventory.ItemsSource = ctx.Inventory.Local;
+            //cmbInventory.DisplayMemberPath = "Make";
+            cmbInventory.SelectedValuePath = "CarId";
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -273,6 +289,97 @@ namespace Cristea_Anamaria_Lab5
         private void btnPrevI_Click(object sender, RoutedEventArgs e)
         {
             inventoryViewSource.View.MoveCurrentToPrevious();
+        }
+
+        private void btnSaveO_Click(object sender, RoutedEventArgs e)
+        {
+            Order order = null;
+            if (action == ActionState.New)
+            {
+                try
+                {
+                    Customer customer = (Customer)cmbCustomers.SelectedItem;
+                    Inventory inventory = (Inventory)cmbInventory.SelectedItem;
+                    //instantiem Order entity
+                    order = new Order()
+                    {
+
+                        CustId = customer.CustId,
+                        CarId = inventory.CarId
+                    };
+                    //adaugam entitatea nou creata in context
+                    ctx.Order.Add(order);
+                    customerOrdersViewSource.View.Refresh();
+                    //salvam modificarile
+                    ctx.SaveChanges();
+                }
+                catch (DataException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else if (action == ActionState.Edit)
+            {
+                dynamic selectedOrder = orderDataGrid.SelectedItem;
+                try
+                {
+                    int curr_id = selectedOrder.OrderId;
+                    var editedOrder = ctx.Order.FirstOrDefault(s => s.OrderId == curr_id);
+                    if (editedOrder != null)
+                    {
+                        editedOrder.CustId = Int32.Parse(cmbCustomers.SelectedValue.ToString());
+                        editedOrder.CarId = Convert.ToInt32(cmbInventory.SelectedValue.ToString());
+                        //salvam modificarile
+                        ctx.SaveChanges();
+                    }
+                }
+                catch (DataException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                BindDataGrid();
+                // pozitionarea pe item-ul curent
+                customerViewSource.View.MoveCurrentTo(selectedOrder);
+            }
+            else if (action == ActionState.Delete)
+            {
+                try
+                {
+                    dynamic selectedOrder = orderDataGrid.SelectedItem;
+                    int curr_id = selectedOrder.OrderId;
+                    var deletedOrder = ctx.Order.FirstOrDefault(s => s.OrderId == curr_id);
+                    if (deletedOrder != null)
+                    {
+                        ctx.Order.Remove(deletedOrder);
+                        ctx.SaveChanges();
+                        MessageBox.Show("Order Deleted Successfully", "Message");
+                        BindDataGrid();
+                    }
+                }
+                catch (DataException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        private void BindDataGrid()
+        {
+            var queryOrder = from ord in ctx.Order
+                             join cust in ctx.Customer on ord.CustId equals
+                             cust.CustId
+                             join inv in ctx.Inventory on ord.CarId
+                 equals inv.CarId
+                             select new
+                             {
+                                 ord.OrderId,
+                                 ord.CarId,
+                                 ord.CustId,
+                                 cust.FirstName,
+                                 cust.LastName,
+                                 inv.Make,
+                                 inv.Color
+                             };
+            customerOrdersViewSource.Source = queryOrder.ToList();
         }
     }
 }

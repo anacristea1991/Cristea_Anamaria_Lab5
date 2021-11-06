@@ -10,6 +10,7 @@
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModel:Customer}, CreateList=True}"/>
         <CollectionViewSource x:Key="inventoryViewSource" d:DesignSource="{d:DesignInstance {x:Type AutoLotModel:Inventory}, CreateList=True}"/>
+        <CollectionViewSource x:Key="customerOrderViewSource" Source="{Binding Order, Source={StaticResource customerViewSource}}"/>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -95,7 +96,57 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Orders">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5" DataContext="{StaticResource customerOrderViewSource}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="38*"/>
+                        <ColumnDefinition Width="759*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Costumers" HorizontalAlignment="Left" Margin="138,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.382,0.25" Width="69" Grid.Column="1"/>
+                    <Label Content="Inventory" HorizontalAlignment="Left" Margin="418,51,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.382,0.25" Width="69" Grid.Column="1"/>
+                    <ComboBox x:Name="cmbCustomers" HorizontalAlignment="Left" Margin="138,82,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} {1}">
+                                            <Binding Path="FirstName"/>
+                                            <Binding Path="LastName"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <ComboBox x:Name="cmbInventory" HorizontalAlignment="Left" Margin="418,82,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0} - {1}">
+                                            <Binding Path="Make"/>
+                                            <Binding Path="Color"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <DataGrid x:Name="orderDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" Grid.Column="1" Margin="138,135,221,103">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="FirstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="LastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="MakeColumn" Binding="{Binding Make}" Header="Make" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="ColorColumn" Binding="{Binding Color}" Header="Color" Width="SizeToHeader"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Button x:Name="btnNewO" Content="New" HorizontalAlignment="Left" Margin="18,51,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <Button x:Name="btnEditO" Content="Edit" HorizontalAlignment="Left" Margin="18,89,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0,0.375" Grid.Column="1"/>
+                    <Button x:Name="btnDeleteO" Content="Delete" HorizontalAlignment="Left" Margin="18,135,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.52,-0.05" Grid.Column="1"/>
+                    <Button x:Name="btnSaveO" Content="Save" HorizontalAlignment="Left" Margin="19,184,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="0.074,0.975" Click="btnSaveO_Click" Grid.Column="1"/>
+                    <Button x:Name="btnCancelO" Content="Cancel" HorizontalAlignment="Left" Margin="19,240,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+                    <Button x:Name="btnPrevO" Content="Previous" HorizontalAlignment="Left" Margin="138,340,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.54,1.275" Grid.Column="1"/>
+                    <Button x:Name="btnNextO" Content="Next" HorizontalAlignment="Left" Margin="464,345,0,0" VerticalAlignment="Top" Width="74" Grid.Column="1"/>
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
