@@ -28,9 +28,9 @@
                     </Grid.ColumnDefinitions>
                     <Button x:Name="btnNew" Content="New" HorizontalAlignment="Left" Margin="63,39,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-0.46,-4.025" Grid.Column="3" Click="btnNew_Click"/>
                     <Button x:Name="btnEdit" Content="Edit" HorizontalAlignment="Left" Margin="65,85,0,0" VerticalAlignment="Top" Width="74" Grid.Column="3" Click="btnEdit_Click"/>
-                    <Button x:Name="btnPrev" Content="Previous" HorizontalAlignment="Left" Margin="187,210,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3"/>
+                    <Button x:Name="btnPrev" Content="Previous" HorizontalAlignment="Left" Margin="187,210,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Click="btnPrev_Click"/>
                     <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="65,136,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.493,-0.9" Grid.Column="3" Click="btnDelete_Click"/>
-                    <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="509,210,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="3.007,-2.25" Grid.Column="3"/>
+                    <Button x:Name="btnNext" Content="Next" HorizontalAlignment="Left" Margin="509,210,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="3.007,-2.25" Grid.Column="3" Click="btnNext_Click"/>
                     <Button x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="65,286,0,0" VerticalAlignment="Top" Width="75" Grid.Column="3" Click="btnSave_Click"/>
                     <Button x:Name="btnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="65,367,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.347,0.5" Grid.Column="3"/>
                     <DataGrid x:Name="customerDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="170,39,99,229" RowDetailsVisibilityMode="VisibleWhenSelected" Grid.Column="3">
@@ -79,18 +79,18 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Car Id:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-                        <TextBox x:Name="carIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding CarId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+                        <TextBox x:Name="carIdTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding CarId, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
                         <Label Content="Color:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="1" VerticalAlignment="Center"/>
                         <TextBox x:Name="colorTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="1" Text="{Binding Color, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                         <Label Content="Make:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="2" VerticalAlignment="Center"/>
                         <TextBox x:Name="makeTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="2" Text="{Binding Make, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
                     </Grid>
-                    <Button x:Name="btnNewI" Content="New" HorizontalAlignment="Left" Margin="152,44,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="-0.209,0.675"/>
-                    <Button x:Name="btnEditI" Content="Edit" HorizontalAlignment="Left" Margin="152,95,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="btnDeleteI" Content="Delete" HorizontalAlignment="Left" Margin="151,152,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button x:Name="btnPrevI" Content="Previous" HorizontalAlignment="Left" Margin="252,194,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="0.362,0.925"/>
-                    <Button x:Name="btnNextI" Content="Next" HorizontalAlignment="Left" Margin="546,194,0,0" VerticalAlignment="Top" Width="76"/>
-                    <Button x:Name="btnSaveI" Content="Save" HorizontalAlignment="Left" Margin="151,266,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.8,2.3"/>
+                    <Button x:Name="btnNewI" Content="New" HorizontalAlignment="Left" Margin="152,44,0,0" VerticalAlignment="Top" Width="74" RenderTransformOrigin="-0.209,0.675" Click="btnNewI_Click"/>
+                    <Button x:Name="btnEditI" Content="Edit" HorizontalAlignment="Left" Margin="152,95,0,0" VerticalAlignment="Top" Width="75" Click="btnEditI_Click"/>
+                    <Button x:Name="btnDeleteI" Content="Delete" HorizontalAlignment="Left" Margin="151,152,0,0" VerticalAlignment="Top" Width="75" Click="btnDeleteI_Click"/>
+                    <Button x:Name="btnPrevI" Content="Previous" HorizontalAlignment="Left" Margin="252,194,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="0.362,0.925" Click="btnPrevI_Click"/>
+                    <Button x:Name="btnNextI" Content="Next" HorizontalAlignment="Left" Margin="546,194,0,0" VerticalAlignment="Top" Width="76" Click="btnNextI_Click"/>
+                    <Button x:Name="btnSaveI" Content="Save" HorizontalAlignment="Left" Margin="151,266,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-1.8,2.3" Click="btnSaveI_Click"/>
                     <Button x:Name="btnCancelI" Content="Cancel" HorizontalAlignment="Left" Margin="151,320,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
